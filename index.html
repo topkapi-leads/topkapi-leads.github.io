@@ -35,9 +35,14 @@
   var f = document.createElement('iframe');
   f.src = APP_URL;
   f.title = 'Topkapi Leads';
-  f.allow = 'clipboard-write';
+  f.allow = 'clipboard-write; geolocation';
   f.onload = function () { document.getElementById('loading').style.display = 'none'; };
   document.body.appendChild(f);
+
+  // تطبيق على الموبايل (PWA): يخلّي "Install app / Add to Home screen" يظهر
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+  }
 </script>
 </body>
 </html>
